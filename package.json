@@ -1,0 +1,30 @@
+{
+  "name": "openseadragon-pixijs-overlay",
+  "version": "0.0.1",
+  "description": "An OpenSeadragon plugin that adds PixiJS overlay capability.",
+  "main": "openseadragon-pixijs-overlay.js",
+  "dependencies": {
+    "openseadragon": "^3.1.0",
+    "pixi-viewport": "^4.34.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ynitto/openseadragon-pixijs-overlay.git"
+  },
+  "files": [],
+  "keywords": [
+    "openseadragon",
+    "plugin",
+    "pixijs",
+    "overlay"
+  ],
+  "author": "ynitto",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/ynitto/openseadragon-pixijs-overlay/issues"
+  },
+  "homepage": "https://github.com/ynitto/openseadragon-pixijs-overlay#readme"
+}

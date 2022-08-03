@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>OpenSeadragon PixiJS Overlay Demo</title>
+    <script src="https://openseadragon.github.io/openseadragon/openseadragon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.5.1/browser/pixi.min.js"></script>
+    <script src="https://davidfig.github.io/pixi-viewport/viewport.min.js"></script>
+    <script src="openseadragon-pixijs-overlay.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <style type="text/css">
+        html,
+        body,
+        .openseadragon1 {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+    <script>
+
+        // ----------
+        App = {
+            // ----------
+            init: function () {
+                var self = this;
+
+                var tileSource = {
+                    Image: {
+                        xmlns: "http://schemas.microsoft.com/deepzoom/2008",
+                        Url: "http://openseadragon.github.io/example-images/highsmith/highsmith_files/",
+                        Format: "jpg",
+                        Overlap: "2",
+                        TileSize: "256",
+                        Size: {
+                            Height: "9221",
+                            Width: "7026"
+                        }
+                    }
+                };
+
+                this.viewer = OpenSeadragon({
+                    id: "contentDiv",
+                    prefixUrl: "openseadragon/images/",
+                    showNavigationControl: false,
+                    tileSources: [{
+                        tileSource: tileSource,
+                        width: 1,
+                        y: 0,
+                        x: 0
+                    }]
+                });
+
+                var options = {
+                    backgroundAlpha: 0.1
+                };
+                this.overlay = this.viewer.pixiOverlay(options);
+            }
+        };
+
+        $(document).ready(function () {
+            App.init();
+
+            const viewport = App.overlay.viewport();
+            for (let i = 0; i < 100000; i++) {
+                let x = Math.random() * 7026;
+                let y = Math.random() * 9221;
+
+                const polyline = new PIXI.Graphics()
+                    .lineStyle(2, 0xff0000 * Math.random())
+                    .moveTo(x, y);
+
+                const counts = (Math.random() * 5) || 0;
+                for (let j = 0; j <= counts; j++) {
+                    x += Math.random() * 20 - 10;
+                    y += Math.random() * 20;
+                    polyline.lineTo(x, y);
+                }
+
+                viewport.addChild(polyline);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="contentDiv" class="openseadragon1"></div>
+</body>
+
+</html>
