@@ -25,6 +25,8 @@
 
     this._containerWidth = 0;
     this._containerHeight = 0;
+    this._worldWidth = options.worldWidth | 0;
+    this._worldHeight = options.worldHeight | 0;
 
     this._canvasdiv = document.createElement('div');
     this._canvasdiv.style.position = 'absolute';
@@ -43,8 +45,8 @@
     this._viewport = new PIXI.Viewport({
       screenWidth: viewer.canvas.clientWidth,
       screenHeight: viewer.canvas.clientHeight,
-      worldWidth: 10000,
-      worldHeight: 10000,
+      worldWidth: this._worldWidth,
+      worldHeight: this._worldHeight,
     });
 
     this._app.stage.addChild(this._viewport);
@@ -93,12 +95,12 @@
       }
 
       const image = this._viewer.world.getItemAt(0);
-      this._viewportWidth = image.source.dimensions.x;
-      this._viewportHeight = image.source.dimensions.y;
+      const worldWidth = this._worldWidth || image.source.dimensions.x;
+      const worldHeight = this._worldHeight || image.source.dimensions.y;
 
       this._viewport.resize(
         this._containerWidth, this._containerHeight,
-        this._viewportWidth, this._viewportHeight
+        worldWidth, worldHeight
       );
     },
     updateViewport: function() {
