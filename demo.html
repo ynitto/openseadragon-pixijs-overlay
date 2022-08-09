@@ -7,7 +7,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.5.1/browser/pixi.min.js"></script>
     <script src="https://davidfig.github.io/pixi-viewport/viewport.min.js"></script>
     <script src="openseadragon-pixijs-overlay.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <style type="text/css">
         html,
         body,
@@ -58,7 +57,7 @@
             }
         };
 
-        $(document).ready(function () {
+        window.onload = function () {
             App.init();
 
             const viewport = App.overlay.viewport();
@@ -79,7 +78,7 @@
 
                 viewport.addChild(polyline);
             }
-        });
+        };
     </script>
 </head>
 
