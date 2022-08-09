@@ -104,12 +104,17 @@
       );
     },
     updateViewport: function() {
-      const image = this._viewer.world.getItemAt(0);
-      const viewportZoom = image.viewportToImageZoom(this._viewer.viewport.getZoom(true));
-      this._viewport.setZoom(viewportZoom);
+      const viewport = this._viewer.viewport;
+      const lastFlag = viewport.silenceMultiImageWarnings || false;
+      viewport.silenceMultiImageWarnings = true;
 
-      const center = image.viewportToImageCoordinates(this._viewer.viewport.getCenter(true));
+      const zoom = viewport.viewportToImageZoom(viewport.getZoom(true));
+      const center = viewport.viewportToImageCoordinates(viewport.getCenter(true));
+
+      this._viewport.setZoom(zoom);
       this._viewport.moveCenter(center.x, center.y);
+
+      viewport.silenceMultiImageWarnings = lastFlag;
     }
   };
 })();
